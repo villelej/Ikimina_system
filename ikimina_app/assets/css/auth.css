@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #e0f2f7, #c1e4f4); /* Light blue cloudy background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+    overflow-y: auto; /* Allow scrolling for long forms like register */
+}
+
+.auth-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px; /* Standard width for both forms */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    margin: 20px; /* Add some margin for smaller screens */
+}
+
+/* Adjust max-width for the register form if it's wider due to columns */
+.auth-container.register-form {
+    max-width: 700px; /* Wider for two-column layout */
+    padding: 30px 50px; /* Adjust padding for wider form */
+}
+
+
+.auth-container h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+    color: #333;
+    z-index: 10; /* Ensure logo is above other elements */
+}
+
+.logo .material-icons {
+    font-size: 30px; /* Make the bolt icon a bit larger */
+    margin-right: 8px;
+    color: #007bff; /* Give the bolt a color */
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative; /* Crucial for positioning icons INSIDE */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+    /* We are mostly using placeholders, so this label might be less visible */
+    /* If you want visible labels, adjust input padding-top and margin-top for icons */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="date"],
+.form-group input[type="tel"], /* Added tel type for phone number */
+.form-group select {
+    width: 100%; /* Take full width of parent */
+    padding: 12px 12px; /* Default padding */
+    padding-right: 45px; /* Space for a single icon */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensures padding is inside the total width */
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+/* Adjust padding for password inputs to accommodate two icons */
+.form-group.password-input input {
+    padding-right: 85px; /* Space for two icons (eye + lock) */
+}
+
+
+.form-group input::placeholder,
+.form-group select option[value=""] { /* Style placeholder for select too */
+    color: #aaa; /* Lighter placeholder text */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="tel"]:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* Icon positioning */
+.form-group .material-icons {
+    position: absolute;
+    right: 12px; /* Default position for a single icon */
+    top: 50%; /* Centered vertically within the form-group */
+    transform: translateY(-50%); /* Fine-tune vertical alignment */
+    color: #aaa;
+    font-size: 20px;
+    pointer-events: none; /* Allows clicks to pass through to the input */
+    z-index: 1; /* Ensure icon is above input text, but below interactive elements */
+}
+
+/* Specific adjustments for password fields with multiple icons */
+.form-group.password-input .material-icons.visibility {
+    pointer-events: auto; /* Make the eye icon clickable */
+    cursor: pointer;
+    right: 12px; /* Eye icon on the very right */
+    z-index: 2; /* Eye icon should be interactive */
+}
+
+.form-group.password-input .material-icons.lock-icon {
+    right: 45px; /* Lock icon to the left of eye icon, adjust as needed */
+    pointer-events: none; /* Lock icon is not interactive */
+}
+
+/* For inputs that have a specific value shown, like "mm/dd/yyyy" for date */
+.form-group input[type="date"] {
+    color: #333; /* Make date text visible */
+}
+/* This will hide the default calendar icon from some browsers, we'll use Material Icon */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 3; /* Ensure the invisible clickable area is on top for date picker */
+}
+
+
+button[type="submit"], .social-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.social-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+    justify-content: space-between;
+}
+
+.social-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f2f5;
+    color: #333;
+    padding: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.social-button:hover {
+    background-color: #e2e4e7;
+    transform: translateY(-2px);
+}
+
+.social-button img {
+    height: 20px;
+    margin-right: 8px;
+}
+
+.links {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666; /* Make link text slightly darker */
+}
+
+.links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 5px; /* Adjust margin for links */
+    transition: color 0.3s ease;
+}
+
+.links a:hover {
+    color: #0056b3;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-top: -15px; /* Pulls it closer to the password field */
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.forgot-password a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Specific styles for password strength */
+.password-strength {
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: left;
+    padding-left: 5px;
+}
+.password-strength.very-weak { color: #dc3545; }
+.password-strength.weak { color: #fd7e14; }
+.password-strength.medium { color: #ffc107; }
+.password-strength.strong { color: #28a745; }
+.password-strength.very-strong { color: #007bff; }
+
+.form-description {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Flexbox for two-column layout in register form */
+.form-row {
+    display: flex;
+    gap: 20px; /* Space between columns */
+    margin-bottom: 0; /* form-group already has margin */
+}
+
+.form-row .form-group {
+    flex: 1; /* Each form-group takes equal space */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .auth-container.register-form {
+        max-width: 90%; /* Adjust max-width for smaller screens */
+        padding: 30px 20px;
+    }
+    .form-row {
+        flex-direction: column; /* Stack columns vertically on small screens */
+        gap: 0;
+    }
+}
+/* =======================
+   AUTH SUCCESS & ERROR MESSAGES
+   ======================= */
+
+.alert {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Success message */
+.alert-success {
+  background-color: #e6ffed;
+  color: #0f5132;
+  border: 1px solid #a3e6b1;
+  box-shadow: 0 2px 6px rgba(0, 150, 50, 0.15);
+}
+
+/* Error message */
+.alert-danger {
+  background-color: #ffe6e6;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+  box-shadow: 0 2px 6px rgba(255, 0, 0, 0.1);
+}
+
+/* Optional fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
